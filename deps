@@ -1,0 +1,12 @@
+-M
+circular_buffer.h
+circular_buffer.c
+main_protected_buffer.c
+protected_buffer.c
+protected_buffer.h
+cond_protected_buffer.c
+cond_protected_buffer.h
+sem_protected_buffer.c
+sem_protected_buffer.h
+utils.c
+utils.h
