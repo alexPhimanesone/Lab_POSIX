@@ -10,8 +10,8 @@
 #include "sem_protected_buffer.h"
 #include "utils.h"
 
-protected_buffer_t *protected_buffer;
-pthread_t *tasks;
+protected_buffer_t* protected_buffer;
+pthread_t* tasks;
 
 long sem_producers;   // Sem prod BLOCKING 0, NONBLOCKING 1, TIMEDOUT 2
 long sem_consumers;   // Sem cons BLOCKING 0, NONBLOCKING 1, TIMEDOUT 2
@@ -134,17 +134,19 @@ int main(int argc, char *argv[]) {
   // Create consumers and then producers. Pass the *value* of i
   // as parametre of the main procedure (main_consumer or main_producer).
   for (i = 0; i < n_consumers; i++) {
-    pthread_create()
+    pthread_create(tasks + i, NULL, main_consumer, tasks + i);
     asprintf(&task_name, "consumer %02d", i);
     set_task_name(i, task_name);
   }
   for (i = n_consumers; i < n_producers + n_consumers; i++) {
+    pthread_create(tasks + i, NULL, main_producer, tasks + i);
     asprintf(&task_name, "producer %02d", i);
     set_task_name(i, task_name);
   }
 
   // Wait for producers and consumers termination
   for (i = 0; i < n_consumers + n_producers; i++) {
+    pthread_join(tasks[i], NULL);
   }
 }
 
