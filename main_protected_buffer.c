@@ -134,6 +134,7 @@ int main(int argc, char *argv[]) {
   // Create consumers and then producers. Pass the *value* of i
   // as parametre of the main procedure (main_consumer or main_producer).
   for (i = 0; i < n_consumers; i++) {
+    pthread_create()
     asprintf(&task_name, "consumer %02d", i);
     set_task_name(i, task_name);
   }

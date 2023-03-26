@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "utils.h": "c",
+        "sem_protected_buffer.h": "c",
+        "protected_buffer.h": "c",
+        "string.h": "c"
+    }
+}
