@@ -95,4 +95,4 @@ install : veryclean index.html
 	chmod og=u-w style.css index.html src.tar.gz
 	cp -p style.css index.html src.tar.gz $(PREFIX)
 
--include deps
+#-include deps
