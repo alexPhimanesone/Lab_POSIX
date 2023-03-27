@@ -135,15 +135,18 @@ int main(int argc, char *argv[]) {
   // as parametre of the main procedure (main_consumer or main_producer).
 
   tasks = (pthread_t*) malloc((n_consumers + n_producers) * sizeof(pthread_t));
+  
+  int* arg_array = (int*) malloc((n_consumers + n_producers) * sizeof(int));
 
   for (i = 0; i < n_consumers; i++) {
-    pthread_create(tasks + i, NULL, main_consumer, &i);
-    sleep(10);
+    arg_array[i] = i;
+    pthread_create(tasks + i, NULL, main_consumer, (void*) (arg_array + i));
     asprintf(&task_name, "consumer %02d", i);
     set_task_name(i, task_name);
   }
   for (i = n_consumers; i < n_producers + n_consumers; i++) {
-    pthread_create(tasks + i, NULL, main_producer, &i);
+    arg_array[i] = i;
+    pthread_create(tasks + i, NULL, main_producer, (void*) (arg_array + i));
     asprintf(&task_name, "producer %02d", i);
     set_task_name(i, task_name);
   }
